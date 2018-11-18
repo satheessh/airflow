@@ -13,10 +13,13 @@ ENV TERM linux
 
 # Airflow
 ARG AIRFLOW_VERSION=1.10.0
-ARG AIRFLOW_HOME=/usr/local/airflow
 ARG AIRFLOW_DEPS=""
 ARG PYTHON_DEPS=""
 ENV AIRFLOW_GPL_UNIDECODE yes
+
+#ARG AIRFLOW_HOME=/usr/local/airflow
+
+ENV AIRFLOW_HOME=/usr/local/airflow
 
 # Define en_US.
 ENV LANGUAGE en_US.UTF-8
@@ -74,7 +77,7 @@ RUN set -ex \
         /usr/share/doc-base
 
 COPY script/entrypoint.sh /entrypoint.sh
-COPY dags ${AIRFLOW_HOME}/dags
+COPY dags ${AIRFLOW_HOME}/airflow/dags
 #COPY config/airflow.cfg ${AIRFLOW_HOME}/airflow.cfg
 
 RUN chown -R airflow: ${AIRFLOW_HOME}
